@@ -1,0 +1,74 @@
+<!-- public/index.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css"></style>
+    <script defer src="bundle.js"></script>
+    <title>Tim Geiter & Bruno Da Silva Vieira</title>
+</head>
+    <body>
+        <h2> Nutzerfilterungs Webseite </h2>
+        <br>
+        <div class="benutzerfilter">
+            <label for="gender">Geschlecht:</label>
+            <select id="gender">
+                <option value="">Alle</option>
+                <option value='m'>M&auml;nnlich</option>
+                <option value='w'>Weiblich</option>
+            </select>
+        
+            <label for="prefix">Pr&auml;fix:</label>
+            <input type="text" id="prefix">
+        
+            <label for="sollp"></label>
+            <select id="sollp">
+                <option value="+">Mit</option>
+                <option value='-'>Ohne</option>
+            </select>
+        
+            <label for="suffix">Suffix:</label>
+            <input type="text" id="suffix">
+        
+            <label for="solls"></label>
+            <select id="solls">
+                <option value="+">Mit</option>
+                <option value='-'>Ohne</option>
+            </select>
+        
+            <label for="syllables">Silbenanzahl:</label>
+            <input type="number" id="silben">
+        
+            <button onclick="filterUsers()">Filtern</button>
+        </div>
+        <p></p>
+        <div class="Dynamische-container">
+            <div class="Namensliste">
+                <div>
+                    <h2> Namensliste: </h2>
+                    <p class="align-center small-text"> (Name - Geschlecht - Silbenanzahl) </p>
+                    <br>
+                    <ul id="resultList"></ul>
+                </div>
+                <br>
+                <div id="pagination">
+                    <button id="prevPage">Vorherige Seite</button>
+                    <span id="pageInfo"></span>
+                    <button id="nextPage">N&auml;chste Seite</button>
+                </div>
+            </div>
+            <div class="Merkzettel"> 
+                <h2> Merkzettel: </h2>
+                <label for="genderSelectedList">Geschlecht:</label>
+                <select id="genderSelectedList" onchange="getImportantUsers()">
+                    <option value="">Alle</option>
+                    <option value='m'>M&auml;nnlich</option>
+                    <option value='w'>Weiblich</option>
+                </select>
+                <ul id="selectedUserList"></ul>
+            </div>
+        </div>
+    </body>
+    </html>
+    

@@ -1,0 +1,42 @@
+{
+  "name": "webapp",
+  "version": "1.0.0",
+  "description": "Package.json Datei des Web-Entwicklung-Projektes",
+  "author": "Tim Geiter, Bruno Da Silva Vieira",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.20.2",
+    "csv-parser": "^3.0.0",
+    "express": "^4.18.2",
+    "sqlite3": "^5.1.7"
+  },
+  "devDependencies": {
+    "esbuild": "^0.19.10",
+    "syllabificate": "^2.0.3",
+    "less": "^4.2.0",
+    "snazzy": "^9.0.0",
+    "less-plugin-clean-css": "",
+    "lesshint": "^6.3.7",
+    "lesshint-reporter-stylish": "^3.0.0",
+    "semistandard": "^17.0.0",
+    "terser": ""
+  },
+  "scripts": {
+    "html": "mkdir -p webapp/dist && cp webapp/src/index.html webapp/dist/index.html",
+    "css": "mkdir -p webapp/dist && lessc webapp/src/styles/style.less webapp/dist/style.css",
+    "js": "mkdir -p webapp/dist && esbuild webapp/src/js/main.js --log-level=warning --bundle --outfile=webapp/dist/bundle.js",
+    "minify": "npm run minify:css && npm run minify:js",
+    "minify:css": "lessc --clean-css webapp/dist/style.css webapp/dist/style.css",
+    "minify:js": "terser webapp/dist/bundle.js --compress --mangle --comments=false -o webapp/dist/bundle.js",
+    "initdb": "mkdir -p server/database && node server/src/initDB.mjs",
+    "clean": "npm run clean:dist && rm -rf node_modules && npm run clean:databaseContent",
+    "clean:dist": "rm -rf webapp/dist",
+    "clean:databaseContent": "rm -f server/database/PersonenListe.db",
+    "lint": "semistandard --verbose webapp/src/js/**/*.js | snazzy && semistandard --verbose server/src/**/*.js | snazzy && lesshint --reporter lesshint-reporter-stylish  webapp/src/styles",
+    "format": "semistandard --verbose --fix webapp/src/js/**/*.js | snazzy && semistandard --verbose --fix server/src/**/*.mjs | snazzy",
+    "predebug": "npm run clean:dist && npm run lint",
+    "debug": "npm run html && npm run css && npm run js",
+    "build": "npm run debug && npm run minify",
+    "start": "node server/src/server.mjs"
+  }
+}
