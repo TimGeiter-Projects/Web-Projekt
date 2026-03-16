@@ -16,7 +16,7 @@ Die initiale Datenbasis wird aus einer CSV-Datei erzeugt, wobei die Silbenanzahl
 - Express (REST-API)
 
 ### Datenbank
-- SQLite (wahlweise MongoDB)
+- SQLite
 
 ### Build & Tooling
 - npm  
